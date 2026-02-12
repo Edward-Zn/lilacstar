@@ -17,11 +17,9 @@ return new class extends Migration {
 
             $table->text('description')->nullable();
 
-            // Optional price
             $table->decimal('price', 10, 2)->nullable();
             $table->char('currency', 3)->default('PLN');
 
-            // Flags for Action-like sections
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_new')->default(false);
             $table->boolean('is_visible')->default(true);
