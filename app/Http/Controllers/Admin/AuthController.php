@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -15,7 +16,7 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (!auth()->attempt($credentials)) {
+        if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
                 'email' => ['Invalid credentials.'],
             ]);
@@ -24,7 +25,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         if (!$user->is_admin) {
-            auth()->logout();
+            Auth::logout();
             throw ValidationException::withMessages([
                 'email' => ['Not allowed.'],
             ]);
