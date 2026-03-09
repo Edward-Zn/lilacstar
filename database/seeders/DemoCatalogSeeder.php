@@ -31,13 +31,10 @@ class DemoCatalogSeeder extends Seeder
                 Product::create([
                     'category_id' => $category->id,
                     'name' => $productName,
-                    'slug' => Str::slug($productName) . '-' . Str::random(5),
-
+                    'slug' => Str::slug($productName) . '-' . Str::random(7),
                     'description' => 'Demo product description. Editable in admin panel',
-
                     'price' => ($p % 2 === 0) ? null : (12.50 + $p),
                     'currency' => 'PLN',
-
                     'is_new' => true,
                     'is_featured' => ($p === 1),
                     'is_visible' => true,
