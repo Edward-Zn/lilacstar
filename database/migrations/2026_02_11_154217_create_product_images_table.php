@@ -12,7 +12,7 @@ return new class extends Migration {
 
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
 
-            $table->string('path'); // e.g. "products/123/main.jpg"
+            $table->string('path');
             $table->string('alt')->nullable();
 
             $table->unsignedInteger('sort_order')->default(0);
