@@ -18,21 +18,20 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => ['Invalid credentials.'],
+                'email' => ['Invalid credentials'],
             ]);
         }
 
         $user = $request->user();
 
-        if (!$user->is_admin) {
+        if (!$user || !$user->is_admin) {
             Auth::logout();
             throw ValidationException::withMessages([
-                'email' => ['Not allowed.'],
+                'email' => ['Not allowed'],
             ]);
         }
 
         $user->tokens()->delete();
-
         $token = $user->createToken('admin')->plainTextToken;
 
         return response()->json([
